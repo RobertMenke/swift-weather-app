@@ -16,6 +16,7 @@
 		C6C955781F87F06A00A7C0B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6C955771F87F06A00A7C0B2 /* Assets.xcassets */; };
 		C6C9557B1F87F06A00A7C0B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C955791F87F06A00A7C0B2 /* LaunchScreen.storyboard */; };
 		C6C955831F87FB3400A7C0B2 /* WeatherFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C955821F87FB3400A7C0B2 /* WeatherFetcher.swift */; };
+		C6D5277E1F8AA4950093B587 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D5277D1F8AA4950093B587 /* WeatherCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		C6C9557A1F87F06A00A7C0B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C6C9557C1F87F06A00A7C0B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6C955821F87FB3400A7C0B2 /* WeatherFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFetcher.swift; sourceTree = "<group>"; };
+		C6D5277D1F8AA4950093B587 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				C6C9557C1F87F06A00A7C0B2 /* Info.plist */,
 				C6C955821F87FB3400A7C0B2 /* WeatherFetcher.swift */,
 				C61FBF941F880BD300C69AA4 /* WeatherForecast.swift */,
+				C6D5277D1F8AA4950093B587 /* WeatherCell.swift */,
 			);
 			path = weather_app;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			files = (
 				C6C955831F87FB3400A7C0B2 /* WeatherFetcher.swift in Sources */,
 				C6C955731F87F06A00A7C0B2 /* ViewController.swift in Sources */,
+				C6D5277E1F8AA4950093B587 /* WeatherCell.swift in Sources */,
 				C6C955711F87F06A00A7C0B2 /* AppDelegate.swift in Sources */,
 				C61FBF951F880BD300C69AA4 /* WeatherForecast.swift in Sources */,
 			);
@@ -369,7 +373,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5U37LXZDFK;
 				INFOPLIST_FILE = weather_app/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.robert.weather-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -384,7 +390,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5U37LXZDFK;
 				INFOPLIST_FILE = weather_app/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.robert.weather-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";

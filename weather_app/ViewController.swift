@@ -9,12 +9,13 @@
 import UIKit
 import SwiftyJSON
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var fetcher : WeatherFetcher?
     var weather : Array<WeatherForecast> = Array()
     
     @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var search_input: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,17 +34,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "row")
-        cell.textLabel?.text = weather[indexPath.row].weather_description
-        return cell
+        return WeatherCell(forecast : weather[indexPath.row])
+//        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "row")
+//        cell.textLabel?.text = weather[indexPath.row].weather_description
+//
+//        cell.addSubview(createWeatherIcon())
+//        return cell
+    }
+    
+    func createWeatherIcon () -> UIButton {
+        let button = UIButton()
+        let sunnyImage = UIImage(named:"ic_wb_sunny")?.withRenderingMode(
+            UIImageRenderingMode.alwaysTemplate)
+        button.tintColor = UIColor(white:0, alpha:0.54)
+        button.setImage(sunnyImage, for: UIControlState.normal)
+        
+        return button
     }
 
     func onWeatherFetch (response : JSON) -> Void {
-        print(response)
-        let raw_data : Array<JSON> = response["list"].array!
-        weather = raw_data.map { WeatherForecast(json: $0) }
-        DispatchQueue.main.async {
-            self.table.reloadData()
+        if(response["list"] != JSON.null) {
+            print(response["list"])
+            let raw_data : Array<JSON> = response["list"].array!
+            weather = raw_data.map { WeatherForecast(json: $0) }
+            DispatchQueue.main.async {
+                self.table.reloadData()
+            }
         }
+    }
+    
+    @IBAction func onSearchTapped(_ sender: UIButton!) {
+        performSearch()
+    }
+    
+    func performSearch() -> Void {
+        let text = search_input.text!
+        self.fetcher?.setLocation(location: text)
     }
 }

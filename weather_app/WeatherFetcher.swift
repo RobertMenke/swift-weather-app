@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class WeatherFetcher : NSObject {
     
-    var location = "Saint Petersburg"
+    var location = "Raleigh"
     let api_key : String = "163858925dc41b12dce74dd7b3c1fc05"
     var callback : (JSON) -> Void
     
