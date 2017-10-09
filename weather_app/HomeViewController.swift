@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var fetcher : WeatherFetcher?
     var weather : Array<WeatherForecast> = Array()
@@ -34,22 +34,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return WeatherCell(forecast : weather[indexPath.row])
-//        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "row")
-//        cell.textLabel?.text = weather[indexPath.row].weather_description
-//
-//        cell.addSubview(createWeatherIcon())
-//        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "row", for: indexPath) as! WeatherCell
+        cell.applyForecast(forecast: weather[indexPath.row])
+        return cell
     }
     
-    func createWeatherIcon () -> UIButton {
-        let button = UIButton()
-        let sunnyImage = UIImage(named:"ic_wb_sunny")?.withRenderingMode(
-            UIImageRenderingMode.alwaysTemplate)
-        button.tintColor = UIColor(white:0, alpha:0.54)
-        button.setImage(sunnyImage, for: UIControlState.normal)
-        
-        return button
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "to_details" {
+//            let detail = segue.destination as! ForecastDetail
+//            print(sender)
+//            detail.forecast = (sender as AnyObject).forecast
+        }
     }
 
     func onWeatherFetch (response : JSON) -> Void {

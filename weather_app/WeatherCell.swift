@@ -11,47 +11,22 @@ import UIKit
 
 class WeatherCell : UITableViewCell {
     
+    @IBOutlet weak var time_label: UILabel!
+    @IBOutlet weak var forecast_label: UILabel!
+    @IBOutlet weak var weather_icon: UIImageView!
+    @IBOutlet weak var low_high: UILabel!
     var forecast : WeatherForecast
-    let identifier = "row"
     
-    init(forecast : WeatherForecast) {
+    
+    func applyForecast (forecast : WeatherForecast) {
         self.forecast = forecast
-        super.init(style: getStyle(), reuseIdentifier: self.identifier)
-        setText()
+        time_label.text = forecast.getDateString()
+        forecast_label.text =  forecast.weather_description
+        low_high.text = forecast.getFormattedTemperature()
+        forecast.downloadImage(callback: {image in
+            self.weather_icon.image = image
+        })
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func getStyle () -> UITableViewCellStyle {
-        return UITableViewCellStyle.default
-    }
-    
-    func setText () {
-        self.textLabel?.text = forecast.weather_description
-    }
-    
-    
-    //https://openweathermap.org/weather-conditions
-    func getIconType () -> String {
-        switch (forecast.weather_tag) {
-        case "Thunderstorm":
-            return "Thunderstorm"
-        case "Drizzle":
-            return "Drizzle"
-        case "Rain":
-            return "rain"
-        case "Snow":
-            return "Snow"
-        case "Clouds":
-            return "clouds"
-        case "Snow":
-            return "snow"
-        case "Clear":
-            return "Clear"
-        default:
-            return "Clear"
-        }
-    }
+
 }
