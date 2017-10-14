@@ -21,6 +21,7 @@ class WeatherForecast : NSObject {
     var weather_tag : String
     var date : String
     let dates : Array<String> = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let weekdays  : Array<String> = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     init(json : JSON) {
         self.json                   = json
@@ -42,10 +43,23 @@ class WeatherForecast : NSObject {
     //Get a formatted time, like 3PM
     func getDateString () -> String {
         let date = getDateTime()
-        print(date.weekday)
         return dates[date.weekday - 1] + ", " + date.string(dateStyle: .none, timeStyle: .short)
     }
+    
+    func getVerboseDateString () -> String {
+        let date = getDateTime()
+        return date.string(dateStyle : .long, timeStyle : .short)
+    }
+    
+    func getVerboseWeekday () -> String {
+        let date = getDateTime()
+        return weekdays[date.weekday - 1]
+    }
 
+    func getFormattedHumidity () -> String {
+        return String(humidity) + "%"
+    }
+    
     //Download the image from openweatherapi
     func downloadImage(callback : @escaping (UIImage) -> Void) {
         let url = getImageURL()
@@ -58,11 +72,19 @@ class WeatherForecast : NSObject {
     }
 
     func getFormattedTemperature () -> String {
-        let low = formatTemperature(temp: low_temperature)
-        let high = formatTemperature(temp: high_temperature)
+        let low = getLowTemperature()
+        let high = getHighTemperature()
         return low + "/" + high
     }
 
+    func getHighTemperature () -> String {
+        return formatTemperature(temp: high_temperature)
+    }
+    
+    func getLowTemperature () -> String {
+        return formatTemperature(temp: low_temperature)
+    }
+    
     private func getImageURL () -> URL {
         return URL(string : "https://openweathermap.org/img/w/" + getImageString())!
     }

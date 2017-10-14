@@ -15,7 +15,7 @@ class WeatherCell : UITableViewCell {
     @IBOutlet weak var forecast_label: UILabel!
     @IBOutlet weak var weather_icon: UIImageView!
     @IBOutlet weak var low_high: UILabel!
-    var forecast : WeatherForecast
+    var forecast : WeatherForecast?
     
     
     func applyForecast (forecast : WeatherForecast) {

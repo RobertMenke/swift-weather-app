@@ -21,6 +21,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         fetcher = WeatherFetcher(callback : self.onWeatherFetch)
         fetcher?.fetchWeather()
+        self.title = fetcher?.location
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -42,18 +43,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "to_details" {
-//            let detail = segue.destination as! ForecastDetail
-//            print(sender)
-//            detail.forecast = (sender as AnyObject).forecast
+            let detail = segue.destination as! ForecastDetail
+            detail.forecast = (sender as! WeatherCell).forecast
         }
     }
 
     func onWeatherFetch (response : JSON) -> Void {
         if(response["list"] != JSON.null) {
-            print(response["list"])
             let raw_data : Array<JSON> = response["list"].array!
             weather = raw_data.map { WeatherForecast(json: $0) }
             DispatchQueue.main.async {
+                self.title = self.fetcher?.location
                 self.table.reloadData()
             }
         }

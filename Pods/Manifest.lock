@@ -1,0 +1,15 @@
+PODS:
+  - SwiftDate (4.4.1)
+  - SwiftyJSON (3.1.4)
+
+DEPENDENCIES:
+  - SwiftDate
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  SwiftDate: a70a534d4feed03b2a2b575e36bef82dc2286a8d
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+
+PODFILE CHECKSUM: 1543f901b13e9def7c84ac760be2c91804cfb0e6
+
+COCOAPODS: 1.3.1
